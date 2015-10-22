@@ -28,7 +28,7 @@ void setup () {
   end2Img=loadImage("img/end2.png");
   treasureX=floor(random(30,500));
   treasureY=floor(random(50,400));
-  hpX=floor(random(10,160));
+  hpX=40;
   enemyX=0;
   enemyY=floor(random(30,400));
   a=0;
@@ -51,6 +51,7 @@ void draw() {
                    gameState=GAME_RUN;
                      x=550;
                      y=height/2;
+                     hpX=40;
                     enemyX=0;
                     enemyY=floor(random(30,400));
                    }else{
@@ -106,32 +107,91 @@ void draw() {
               fill(255,0,0);
               rect(15,15,hpX,20);
               image(hpImg,10,10);
+              if(hpX>=200){
+                hpX=200;
+              }
               
               //treasure
               
               image(treasureImg,treasureX,treasureY);
               
+              if(x>=treasureX&& x-treasureX<=45 && y>=treasureY && y-treasureY<=45)
+                {
+                  hpX=hpX+20;
+                    treasureX=floor(random(30,500));
+                    treasureY=floor(random(50,400));
+                    if(hpX>=200){
+                   hpX=200;
+                }
+                }
+                 if(x>=treasureX&& x-treasureX<=45 && y<=treasureY && treasureY-y<=45)
+                {
+                  hpX=hpX+20;
+                    treasureX=floor(random(30,500));
+                    treasureY=floor(random(50,400));
+                     if(hpX>=200){
+                   hpX=200;
+                     }
+                }
+                  if(x<=treasureX&& treasureX-X<=45 && y>=treasureY && y-treasureY<=45)
+                {
+                  hpX=hpX+20;
+                    treasureX=floor(random(30,500));
+                    treasureY=floor(random(50,400));
+                     if(hpX>=200){
+                   hpX=200;
+                     }
+                }
+                  if(x<=treasureX&& treasureX-x<=45 && y<=treasureY && treasureY-y<=45)
+                {
+                  hpX=hpX+20;
+                    treasureX=floor(random(30,500));
+                    treasureY=floor(random(50,400));
+                     if(hpX>=200){
+                   hpX=200;
+                     }
+                }
+              
               //enemy
               
-              image(enemyImg,enemyX,enemyY);  
+              image(enemyImg,enemyX,enemyY);       
               enemyX+=2;
               enemyX%=640;
+              if(enemyY<y){
+               enemyY++;     
+              }
+              if(enemyY>y){
+               enemyY--;     
+              }
               
-              //gameOver
-              if(x>enemyX && x-enemyX<45 && y>enemyY && y-enemyY<45){
-                gameState=GAME_OVER;
+              //life
+              if(x>=enemyX && x-enemyX<=45 && y>=enemyY && y-enemyY<=45){
+               hpX=hpX-40;
+               enemyX=0;
+               enemyY=floor(random(30,400));
               }
-              if(x>enemyX && x-enemyX<45 && y<enemyY && enemyY-y<45){
-                gameState=GAME_OVER;
+              if(x>=enemyX && x-enemyX<=45 && y<=enemyY && enemyY-y<=45){
+                hpX=hpX-40;
+                   enemyX=0;
+                enemyY=floor(random(30,400));
               }
-               if(enemyX>x && enemyX-x<45 && y>enemyY && y-enemyY<45){
-                gameState=GAME_OVER;
+               if(enemyX>=x && enemyX-x<=45 && y>=enemyY && y-enemyY<=45){
+                 hpX=hpX-40;
+                 enemyX=0;
+                 enemyY=floor(random(30,400));
               }
-               if(enemyX>x && enemyX-x<45 && y<enemyY && enemyY-y<45){
-                gameState=GAME_OVER;
+               if(enemyX>=x && enemyX-x<=45 && y<=enemyY && enemyY-y<=45){
+                 hpX=hpX-40;
+                 enemyX=0;
+               enemyY=floor(random(30,400));
               }
-     
-             
+               
+            //gameOver
+            
+            if( hpX==0){         
+             gameState=GAME_OVER;
+            }
+            
     break;
     case GAME_OVER:
        image(end2Img,0,0);
