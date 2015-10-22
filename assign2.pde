@@ -49,10 +49,16 @@ void draw() {
                 if( 210<mouseX && mouseX<450 && 370<mouseY&& mouseY<400 ){
                    if(mousePressed){
                    gameState=GAME_RUN;
+                     x=550;
+                     y=height/2;
+                    enemyX=0;
+                    enemyY=floor(random(30,400));
                    }else{
                    image(start1Img,0,0);
                    }
                   }
+          
+           
     break;
     
     case GAME_RUN:
@@ -134,14 +140,14 @@ void draw() {
            gameState = GAME_START;
            }else{
            image(end1Img,0,0);
-           }
+           }          
      break;
       
       }
    
- 
   }
 }
+
 void keyPressed(){
   
      if(key==CODED){
