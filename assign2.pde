@@ -188,7 +188,7 @@ void draw() {
                
             //gameOver
             
-            if( hpX==0){         
+            if( hpX<=0){         
              gameState=GAME_OVER;
             }
             
@@ -197,7 +197,12 @@ void draw() {
        image(end2Img,0,0);
        if (210<mouseX &&mouseX<450 && 288<mouseY && mouseY<336  ){
            if(mousePressed){
-           gameState = GAME_START;
+           gameState = GAME_RUN;
+             x=550;
+              y=height/2;
+              hpX=40;
+              enemyX=0;
+              enemyY=floor(random(30,400));
            }else{
            image(end1Img,0,0);
            }          
@@ -248,6 +253,4 @@ void keyReleased(){
       }
      }
 
- 
-    
-    }
+  }
